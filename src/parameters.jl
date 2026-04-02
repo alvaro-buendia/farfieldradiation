@@ -1,0 +1,17 @@
+eb = 1 # Host permittivity
+hbar = 6.582119569*10^-16; # ħ
+c = 2.99792458*10^8; # speed of light
+e0 = 8.8541878128*10^-12 # vacuum permitivity
+einf = 1 #ϵ_∞
+d= 1.5e-7; # unit cell length
+a = 1e-8; # particle radius
+tau = 1e3*hbar #decay rate
+wp = 2.5*sqrt(3)/hbar #ω_p
+wsp = roots([-wp^2, im/tau*(einf+2*eb), einf+2*eb])[2] # LSPR complex frequency
+wsp0 = wp/sqrt(einf+2*eb) # real LSPR frequency
+e(w) = einf - wp^2/(w^2+im*w/tau) #ϵ(ω)
+aqs(w) = 4*pi*a^3*(e(w)-eb)/(e(w)+2*eb) #quasistatic polarizability
+alph(w) =  k0(w)^2/(1/aqs(w) - im*k0(w)^3/(6*pi)); #polarizability
+k0(w) = sqrt(eb)*w/c # wave momentum
+ksp = k0(wsp0) # wave momentum at the plasmon frequency
+beta = 1.6
